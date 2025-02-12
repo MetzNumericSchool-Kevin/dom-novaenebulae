@@ -48,3 +48,33 @@ greenButton.addEventListener("click", () => {
 	boxes[2].style.backgroundColor = "green";
 });
 
+// Exercice 6 : Aventurier, voici ma boutique ! :
+
+const potions = [
+	{
+		nom: "Potion de soin",
+		description: "Cette potion rouge vif a une odeur de fraise des bois. Un seul gorgée et vos blessures se referment comme par magie ! Effets secondaires possibles: cheveux roses pendant 24h.",
+		prix: 10,
+	},
+	{
+		nom: "Potion de sommeil",
+		description:
+			"Un liquide bleu nuit qui sent la lavande et les rêves. Une goutte et vous dormirez comme un bébé dragon ! Attention: ne pas utiliser si vous devez combattre un troll dans les prochaines 8 heures.",
+		prix: 50,
+	},
+];
+
+const potionList = document.querySelector('#liste_potions');
+
+for (const potion of potions) {
+	const potionListTemplate = document.querySelector("#template_potion").content.cloneNode(true);
+
+	potionListTemplate.querySelector('.nom_potion').textContent = potion.nom;
+	potionListTemplate.querySelector('.prix_potion').textContent = potion.prix;
+	potionListTemplate.querySelector(".description_potion").textContent = potion.description;
+
+	potionList.appendChild(potionListTemplate);
+}
+
+
+
