@@ -24,23 +24,22 @@ callButton.addEventListener("click", () => {
 	alert("🧙‍♂️ J'arrive, j'arrive Aventurier !");
 });
 
-// Exercice 5 : Faisons un peu de magie : 
+// Exercice 5 : Faisons un peu de magie :
 
-const boxes = document.querySelectorAll('#boites_magique .boite')
+const boxes = document.querySelectorAll("#boites_magique .boite");
 
-const redButton = document.querySelector('#btn_change_red');
+const redButton = document.querySelector("#btn_change_red");
 const blueButton = document.querySelector("#btn_change_blue");
 const greenButton = document.querySelector("#btn_change_green");
 
 redButton.addEventListener("click", () => {
-	boxes[0].style.backgroundColor = 'red';
-})
+	boxes[0].style.backgroundColor = "red";
+});
 
 blueButton.addEventListener("click", () => {
 	boxes[0].style.backgroundColor = "blue";
 	boxes[1].style.backgroundColor = "blue";
 });
-
 
 greenButton.addEventListener("click", () => {
 	boxes[0].style.backgroundColor = "green";
@@ -64,17 +63,44 @@ const potions = [
 	},
 ];
 
-const potionList = document.querySelector('#liste_potions');
+function displayPotionList(potions) {
+	const potionList = document.querySelector("#liste_potions");
 
-for (const potion of potions) {
-	const potionListTemplate = document.querySelector("#template_potion").content.cloneNode(true);
+	potionList.innerHTML = "";
 
-	potionListTemplate.querySelector('.nom_potion').textContent = potion.nom;
-	potionListTemplate.querySelector('.prix_potion').textContent = potion.prix;
-	potionListTemplate.querySelector(".description_potion").textContent = potion.description;
+	for (const potion of potions) {
+		const potionListTemplate = document.querySelector("#template_potion").content.cloneNode(true);
 
-	potionList.appendChild(potionListTemplate);
+		potionListTemplate.querySelector(".nom_potion").textContent = potion.nom;
+		potionListTemplate.querySelector(".prix_potion").textContent = potion.prix;
+		potionListTemplate.querySelector(".description_potion").textContent = potion.description;
+
+		potionList.appendChild(potionListTemplate);
+	}
 }
 
+displayPotionList(potions);
 
+// Exercice 7 : Plus de potions, nous avons besoin de plus de potions ! :
 
+const form = document.querySelector(".form");
+
+form.addEventListener("submit", (click) => {
+	click.preventDefault();
+
+	const formData = new FormData(form);
+
+	addPotion(formData);
+});
+
+function addPotion(formData) {
+	newPotion = {
+		nom: formData.get("nom"),
+		description: formData.get("description"),
+		prix: formData.get("prix"),
+	};
+
+	potions.push(newPotion);
+
+	displayPotionList(potions);
+}
